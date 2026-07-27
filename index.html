@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TALHO XAI-XAI - Carne Fresca Diariamente</title>
+  <meta name="description" content="TALHO XAI-XAI - Encomende carne fresca online em Xai-Xai. Peixe, Lâmina, Suínos e Frango com entrega rápida.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    html { scroll-behavior: smooth; }
+  .hero-bg { background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1607623814075-e51df1bdc82d?w=1200') center/cover; }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <!-- Header -->
+  <header class="bg-red-700 text-white sticky top-0 z-50 shadow-lg">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <i class="fa-solid fa-cow text-3xl"></i>
+        <div>
+          <h1 class="text-2xl font-bold">TALHO XAI-XAI</h1>
+          <p class="text-xs text-red-200">Carne Fresca Diariamente</p>
+        </div>
+      <nav class="hidden md:flex gap-6 font-bold">
+        <a href="#produtos" class="hover:text-red-200">Produtos</a>
+        <a href="#sobre" class="hover:text-red-200">Sobre</a>
+        <a href="#contato" class="hover:text-red-200">Contato</a>
+      </nav>
+      <button onclick="toggleCart()" class="relative bg-white text-red-700 px-4 py-2 rounded-lg font-bold">
+        <i class="fa-solid fa-cart-shopping"></i> Carrinho
+        <span id="cartCount" class="absolute -top-2 -right-2 bg-black text-white text-xs w-6 h-6 rounded-full flex items-center justify-center">0</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero-bg text-white py-20 text-center">
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="text-5xl font-bold mb-4">Carne Fresca Todos os Dias</h2>
+      <p class="text-xl mb-8">Encomende online e receba em Xai-Xai com qualidade garantida</p>
+      <div class="flex gap-4 justify-center flex-wrap">
+        <a href="#produtos" class="bg-red-700 hover:bg-red-800 px-8 py-4 rounded-lg font-bold text-lg">
+          <i class="fa-solid fa-drumstick-bite"></i> Ver Produtos
+        </a>
+        <a href="https://wa.me/258874555159?text=Olá%20TALHO%20XAI-XAI,%20quero%20fazer%20um%20pedido"
+           class="bg-green-500 hover:bg-green-600 px-8 py-4 rounded-lg font-bold text-lg">
+          <i class="fa-brands fa-whatsapp"></i> WhatsApp: +258 87 455 5159
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vantagens -->
+  <section class="max-w-6xl mx-auto px-4 py-12 grid md:grid-cols-3 gap-6 text-center">
+    <div class="bg-white p-6 rounded-lg shadow">
+      <i class="fa-solid fa-truck text-4xl text-red-700 mb-3"></i>
+      <h3 class="font-bold text-xl mb-2">Entrega Rápida</h3>
+      <p class="text-gray-600">Entregamos no mesmo dia em Xai-Xai</p>
+    </div>
+    <div class="bg-white p-6 rounded-lg shadow">
+      <i class="fa-solid fa-award text-4xl text-red-700 mb-3"></i>
+      <h3 class="font-bold text-xl mb-2">Qualidade Garantida</h3>
+      <p class="text-gray-600">Toda carne fresca e inspecionada</p>
+    </div>
+    <div class="bg-white p-6 rounded-lg shadow">
+      <i class="fa-brands fa-whatsapp text-4xl text-red-700 mb-3"></i>
+      <h3 class="font-bold text-xl mb-2">Suporte 24/7</h3>
+      <p class="text-gray-600">Atendimento via WhatsApp sempre</p>
+    </div>
+  </section>
+
+  <!-- Produtos -->
+  <section id="produtos" class="max-w-6xl mx-auto px-4 py-8">
+    <h3 class="text-4xl font-bold mb-8 text-center">Nossos Produtos</h3>
+
+    <div class="mb-10">
+      <h4 class="text-2xl font-bold text-blue-700 mb-4 border-b-2 border-blue-700 pb-2">🐟 PEIXE</h4>
+      <div class="grid md:grid-cols-3 gap-4" id="peixeList"></div>
+    </div>
+
+    <div class="mb-10">
+      <h4 class="text-2xl font-bold text-red-700 mb-4 border-b-2 border-red-700 pb-2">🥩 LÂMINA</h4>
+      <div class="grid md:grid-cols-3 gap-4" id="laminaList"></div>
+      <p class="text-sm text-gray-600 mt-2">* Peixe 25 disponível apenas em lâminas</p>
+    </div>
+
+    <div class="mb-10">
+      <h4 class="text-2xl font-bold text-yellow-700 mb-4 border-b-2 border-yellow-700 pb-2">🍗 SUÍNOS E FRANGO</h4>
+      <div class="grid md:grid-cols-3 gap-4" id="suinoList"></div>
+    </div>
+  </section>
+
+  <!-- Pagamentos -->
+  <section class="bg-gray-900 text-white py-12">
+    <div class="max-w-6xl mx-auto px-4">
+      <h3 class="text-3xl font-bold text-center mb-8">Formas de Pagamento</h3>
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-4 text-center">
+        <div class="bg-gray-800 p-6 rounded-lg"><i class="fa-solid fa-credit-card text-4xl mb-2"></i><p class="font-bold">POS</p></div>
+        <div class="bg-gray-800 p-6 rounded-lg"><i class="fa-solid fa-money-bill text-4xl mb-2"></i><p class="font-bold">DINHEIRO</p></div>
+        <div class="bg-gray-800 p-6 rounded-lg"><i class="fa-solid fa-mobile text-4xl mb-2"></i><p class="font-bold">IZI</p></div>
+        <div class="bg-gray-800 p-6 rounded-lg">
+          <i class="fa-solid fa-wallet text-4xl mb-2 text-green-500"></i>
+          <p class="font-bold">M-PESA</p>
+          <p class="text-sm text-green-400">PAGA FÁCIL: 0003302</p>
+        </div>
+        <div class="bg-gray-800 p-6 rounded-lg">
+          <i class="fa-solid fa-mobile-screen text-4xl mb-2 text-red-500"></i>
+          <p class="font-bold">E-MOLA</p>
+          <p class="text-sm text-red-400">559178</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sobre -->
+  <section id="sobre" class="max-w-6xl mx-auto px-4 py-12">
+    <div class="grid md:grid-cols-2 gap-8 items-center">
+      <div>
+        <h3 class="text-3xl font-bold mb-4">Sobre TALHO XAI-XAI</h3>
+        <p class="text-gray-700 mb-4">Somos uma açougaria dedicada a fornecer carne fresca de alta qualidade para a população de Xai-Xai. Com mais de 10 anos de experiência, garantimos os melhores produtos ao melhor preço.</p>
+        <p class="text-gray-700 mb-6">Nossas carnes são selecionadas diariamente, garantindo frescura e qualidade. Oferecemos diversos cortes de peixe, carne vermelha, frango e suínos para atender todas as suas necessidades.</p>
+        <div class="space-y-2">
+          <p><i class="fa-solid fa-check text-green-600 mr-2"></i>Carne inspecionada diariamente</p>
+          <p><i class="fa-solid fa-check text-green-600 mr-2"></i>Entrega rápida e segura</p>
+          <p><i class="fa-solid fa-check text-green-600 mr-2"></i>Atendimento personalizado</p>
+          <p><i class="fa-solid fa-check text-green-600 mr-2"></i>Múltiplas formas de pagamento</p>
+        </div>
+      </div>
+      <div class="bg-red-100 p-8 rounded-lg">
+        <h4 class="text-2xl font-bold mb-4 text-red-700" id="contato">Contacte-nos</h4>
+        <div class="space-y-4">
+          <div class="flex items-center gap-3">
+            <i class="fa-brands fa-whatsapp text-2xl text-green-600"></i>
+            <div>
+              <p class="font-bold">WhatsApp</p>
+              <p>+258 87 455 5159</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <i class="fa-solid fa-location-dot text-2xl text-red-600"></i>
+            <div>
+              <p class="font-bold">Localização</p>
+              <p>Xai-Xai, Gaza, Moçambique</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <i class="fa-solid fa-clock text-2xl text-blue-600"></i>
+            <div>
+              <p class="font-bold">Horário</p>
+              <p>Segunda a Sábado: 6h - 18h</p>
+              <p>Domingo: 7h - 12h</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Carrinho -->
+  <div id="cartSidebar" class="fixed top-0 right-0 w-full md:w-96 h-full bg-white shadow-2xl transform translate-x-full transition-transform z-50 overflow-y-auto">
+    <div class="p-6">
+      <div class="flex justify-between items-center mb-6">
+        <h3 class="text-2xl font-bold">Seu Pedido</h3>
+        <button onclick="toggleCart()" class="text-2xl"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <!-- NOVO: Campo nome/telefone -->
+      <div class="mb-4 space-y-2">
+        <input type="text" id="clienteNome" placeholder="Seu nome" class="w-full border p-2 rounded-lg">
+        <input type="tel" id="clienteTelefone" placeholder="Seu WhatsApp: 87xxxxxxx" class="w-full border p-2 rounded-lg">
+      </div>
+      <div id="cartItems" class="space-y-4 mb-6"></div>
+      <div class="border-t pt-4">
+        <div class="flex justify-between text-xl font-bold mb-4">
+          <span>Total:</span>
+          <span id="cartTotal">0 MT</span>
+        </div>
+        <button onclick="sendWhatsApp()" class="w-full bg-green-500 text-white py-3 rounded-lg font-bold mb-2">
+          <i class="fa-brands fa-whatsapp"></i> Pedir no WhatsApp
+        </button>
+        <button onclick="savePedido()" class="w-full bg-red-700 text-white py-3 rounded-lg font-bold mb-2">
+          <i class="fa-solid fa-check"></i> Confirmar Pedido
+        </button>
+        <button onclick="clearCart()" class="w-full bg-gray-500 text-white py-2 rounded-lg">
+          Limpar Carrinho
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Login Modal -->
+  <div id="loginModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+    <div class="bg-white p-8 rounded-lg max-w-sm w-full mx-4">
+      <h3 class="text-2xl font-bold mb-4">Login Admin</h3>
+      <input type="password" id="adminPass" placeholder="Senha" class="w-full border p-3 rounded-lg mb-4">
+      <button onclick="login()" class="w-full bg-red-700 text-white py-3 rounded-lg font-bold">Entrar</button>
+      <button onclick="closeLogin()" class="w-full mt-2 text-gray-600">Cancelar</button>
+      <p class="text-xs text-gray-500 mt-3">Senha padrão: talho2026</p>
+    </div>
+  </div>
+
+  <!-- Dashboard Admin -->
+  <div id="adminPanel" class="hidden">
+    <section class="max-w-6xl mx-auto px-4 py-8 bg-yellow-50">
+      <div class="flex justify-between items-center mb-6">
+        <h3 class="text-3xl font-bold">Painel Admin - TALHO XAI-XAI</h3>
+        <button onclick="logout()" class="bg-gray-700 text-white px-4 py-2 rounded-lg"><i class="fa-solid fa-right-from-bracket"></i> Sair</button>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-4 mb-8">
+        <div class="bg-white p-6 rounded-lg shadow">
+          <p class="text-gray-600">Vendas Hoje</p>
+          <p class="text-3xl font-bold text-green-600" id="vendasHoje">0 MT</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow">
+          <p class="text-gray-600">Pedidos Hoje</p>
+          <p class="text-3xl font-bold text-blue-600" id="pedidosHoje">0</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow">
+          <p class="text-gray-600">Mais Vendido</p>
+          <p class="text-xl font-bold text-red-600" id="maisVendido">-</p>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-lg shadow">
+        <div class="flex border-b">
+          <button onclick="showTab('pedidos')" class="tab-btn px-6 py-3 font-bold border-b-2 border-red-700">Pedidos</button>
+          <button onclick="showTab('stock')" class="tab-btn px-6 py-3 font-bold text-gray-600">Stock & Preços</button>
+        </div>
+
+        <div id="tabPedidos" class="p-6">
+          <div id="adminPedidos"></div>
+        </div>
+
+        <div id="tabStock" class="p-6 hidden">
+          <div id="stockList"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-black text-white py-8">
+    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-3 gap-8">
+      <div>
+        <h4 class="font-bold text-xl mb-3">TALHO XAI-XAI</h4>
+        <p class="text-gray-400">Carne fresca todos os dias para sua família.</p>
+      </div>
+      <div>
+        <h4 class="font-bold text-xl mb-3">Links Rápidos</h4>
+        <div class="space-y-2">
+          <a href="#produtos" class="block text-gray-400 hover:text-white">Produtos</a>
+          <a href="#sobre" class="block text-gray-400 hover:text-white">Sobre</a>
+          <a href="#contato" class="block text-gray-400 hover:text-white">Contato</a>
+        </div>
+      <div>
+        <h4 class="font-bold text-xl mb-3">Contacto</h4>
+        <p class="text-gray-400">WhatsApp: +258 87 455 5159</p>
+        <p class="text-gray-400">Email: talho@xaixai.mz</p>
+      </div>
+    </div>
+    <div class="text-center mt-8 pt-8 border-t border-gray-800">
+      <p class="text-gray-500">© 2026 TALHO XAI-XAI | Todos os direitos reservados</p>
+      <button onclick="showLogin()" class="text-xs text-gray-600 mt-2 hover:text-gray-400"><i class="fa-solid fa-lock"></i> Admin</button>
+    </div>
+  </footer>
+
+  <script>
+    const ADMIN_PASS = 'talho2026';
+    const ADMIN_WHATSAPP = '258874555159'; // Teu número pra receber notificação
+
+    let produtos = JSON.parse(localStorage.getItem('produtos')) || {
+      peixe: [
+        {id: 'p1', nome: "Peixe 18 - 30kg", preco: 6050, stock: 10},
+        {id: 'p2', nome: "Peixe 16 - 30kg", preco: 5400, stock: 10},
+        {id: 'p3', nome: "Atum - 10kg", preco: 1900, stock: 15}
+      ],
+      lamina: [
+        {id: 'l1', nome: "Lâmina 18 - 10kg", preco: 2050, stock: 20},
+        {id: 'l2', nome: "Lâmina 25 - 10kg", preco: 2150, stock: 20},
+        {id: 'l3', nome: "Lâmina 16 - 10kg", preco: 1850, stock: 20}
+      ],
+      suino: [
+        {id: 's1', nome: "Porco - 5kg", preco: 1250, stock: 15},
+        {id: 's2', nome: "Asas - 10kg", preco: 1250, stock: 25},
+        {id: 's3', nome: "Carcaça - 10kg", preco: 750, stock: 30},
+        {id: 's4', nome: "Pescoço - 10kg", preco: 1000, stock: 15},
+        {id: 's5', nome: "Cauda - 10kg", preco: 1250, stock: 10},
+        {id: 's6', nome: "Patas - 10kg", preco: 1000, stock: 20},
+        {id: 's7', nome: "Patas - 15kg", preco: 1550, stock: 10},
+        {id: 's8', nome: "Caixa Frangos 1.3kg", preco: 3200, stock: 12},
+        {id: 's9', nome: "Caixa Palone", preco: 3300, stock: 8},
+        {id: 's10', nome: "Caixa Rachel", preco: 4300, stock: 6}
+      ]
+    };
+
+    let cart = [];
+    let pedidos = JSON.parse(localStorage.getItem('pedidos')) || [];
+    let isAdmin = sessionStorage.getItem('isAdmin') === 'true';
+
+    function saveProdutos() {
+      localStorage.setItem('produtos', JSON.stringify(produtos));
+    }
+
+    function renderProdutos() {
+      ['peixe', 'lamina', 'suino'].forEach(cat => {
+        const container = document.getElementById(cat + 'List');
+        container.innerHTML = '';
+        produtos[cat].forEach(p => {
+          if (p.stock <= 0) return;
+          container.innerHTML += `
+            <div class="bg-white p-4 rounded-lg shadow hover:shadow-lg transition">
+              <h5 class="font-bold text-lg mb-1">${p.nome}</h5>
+              <p class="text-2xl font-bold text-red-700 mb-3">${p.preco.toLocaleString()} MT</p>
+              <button onclick="addToCart('${p.id}')" class="w-full bg-red-700 text-white py-2 rounded-lg font-bold hover:bg-red-800">
+                <i class="fa-solid fa-plus"></i> Adicionar
+              </button>
+            </div>
+          `;
+        });
+      });
+    }
+
+    function addToCart(id) {
+      const allProdutos = [...produtos.peixe,...produtos.lamina,...produtos.suino];
+      const produto = allProdutos.find(p => p.id === id);
+      if (!produto || produto.stock <= 0) return alert('Sem stock!');
+
+      const item = cart.find(i => i.id === id);
+      if (item) {
+        if (item.qtd >= produto.stock) return alert('Stock máximo atingido!');
+        item.qtd++;
+      } else {
+        cart.push({id: produto.id, nome: produto.nome, preco: produto.preco, qtd: 1});
+      }
+      updateCart();
+    }
+
+    function updateCart() {
+      const cartItems = document.getElementById('cartItems');
+      const cartTotal = document.getElementById('cartTotal');
+      const cartCount = document.getElementById('cartCount');
+
+      cartItems.innerHTML = '';
+      let total = 0, count = 0;
+
+      if (cart.length === 0) {
+        cartItems.innerHTML = '<p class="text-gray-500">Seu carrinho está vazio</p>';
+      } else {
+        cart.forEach(item => {
+          total += item.preco * item.qtd;
+          count += item.qtd;
+          cartItems.innerHTML += `
+            <div class="border-b pb-3">
+              <div class="flex justify-between items-start mb-2">
+                <div class="flex-1">
+                  <p class="font-bold">${item.nome}</p>
+                  <p class="text-sm text-gray-600">${item.preco.toLocaleString()} MT</p>
+                </div>
+                <button onclick="removeFromCart('${item.id}')" class="text-red-600"><i class="fa-solid fa-trash"></i></button>
+              </div>
+              <div class="flex items-center gap-3">
+                <button onclick="updateQty('${item.id}', -1)" class="bg-gray-200 px-3 py-1 rounded">-</button>
+                <span class="font-bold">${item.qtd}</span>
+                <button onclick="updateQty('${item.id}', 1)" class="bg-gray-200 px-3 py-1 rounded">+</button>
+                <span class="ml-auto font-bold">${(item.preco * item.qtd).toLocaleString()} MT</span>
+              </div>
+            </div>
+          `;
+        });
+      }
+
+      cartTotal.textContent = total.toLocaleString() + ' MT';
+      cartCount.textContent = count;
+    }
+
+    function updateQty(id, change) {
+      const item = cart.find(i => i.id === id);
+      if (!item) return;
+      const allProdutos = [...produtos.peixe,...produtos.lamina,...produtos.suino];
+      const produto = allProdutos.find(p => p.id === id);
+      if (item.qtd + change > produto.stock) return alert('Stock máximo atingido!');
+      if (item.qtd + change <= 0) return removeFromCart(id);
+      item.qtd += change;
+      updateCart();
+    }
+
+    function removeFromCart(id) {
+      cart = cart.filter(i => i.id!== id);
+      updateCart();
+    }
+
+    function clearCart() {
+      cart = [];
+      updateCart();
+    }
+
+    function toggleCart() {
+      document.getElementById('cartSidebar').classList.toggle('translate-x-full');
+    }
+
+    function sendWhatsApp() {
+      if (cart.length === 0) return alert('Carrinho vazio!');
+      const nome = document.getElementById('clienteNome').value || 'Cliente';
+      let msg = `Olá TALHO XAI-XAI! Sou ${nome} e quero pedir:%0A%0A`;
+      let total = 0;
+      cart.forEach(i => {
+        msg += `${i.qtd}x ${i.nome} - ${(i.preco * i.qtd).toLocaleString()} MT%0A`;
+        total += i.preco * i.qtd;
+      });
+      msg += `%0ATotal: ${total.toLocaleString()} MT%0A%0APagamento: `;
+      window.open(`https://wa.me/258874555159?text=${msg}`, '_blank');
+    }
+
+    function savePedido() {
+      if (cart.length === 0) return alert('Carrinho vazio!');
+      const nome = document.getElementById('clienteNome').value.trim();
+      const telefone = document.getElementById('clienteTelefone').value.trim();
+
+      if (!nome) return alert('Por favor, digite seu nome');
+
+      const total = cart.reduce((sum, i) => sum + i.preco * i.qtd, 0);
+
+      cart.forEach(item => {
+        ['peixe', 'lamina', 'suino'].forEach(cat => {
+          const prod = produtos[cat].find(p => p.id === item.id);
+          if (prod) prod.stock -= item.qtd;
+        });
+      });
+      saveProdutos();
+
+      const pedidoId = Date.now();
+      pedidos.unshift({
+        id: pedidoId,
+        cliente: nome,
+        telefone: telefone,
+        items: [...cart],
+        total: total,
+        data: new Date().toLocaleString('pt-MZ'),
+        status: 'pendente'
+      });
+      localStorage.setItem('pedidos', JSON.stringify(pedidos));
+
+      // NOTIFICAÇÃO PRO ADMIN NO WHATSAPP
+      let msgAdmin = `🔔 NOVO PEDIDO #${pedidoId}%0A%0A`;
+      msgAdmin += `👤 Cliente: ${nome}%0A`;
+      if (telefone) msgAdmin += `📱 Tel: ${telefone}%0A`;
+      msgAdmin += `%0A📦 Produtos:%0A`;
+      cart.forEach(i => {
+        msgAdmin += `• ${i.qtd}x ${i.nome} - ${(i.preco * i.qtd).toLocaleString()} MT%0A`;
+      });
+      msgAdmin += `%0A💰 Total: ${total.toLocaleString()} MT%0A`;
+      msgAdmin += `📅 ${new Date().toLocaleString('pt-MZ')}`;
+      window.open(`https://wa.me/${ADMIN_WHATSAPP}?text=${msgAdmin}`, '_blank');
+
+      cart = [];
+      document.getElementById('clienteNome').value = '';
+      document.getElementById('clienteTelefone').value = '';
+      updateCart();
+      renderProdutos();
+      updateDashboard();
+      toggleCart();
+      alert('Pedido registado! Tu e o TALHO receberam notificação no WhatsApp.');
+    }
+
+    function showLogin() {
+      document.getElementById('loginModal').classList.remove('hidden');
+      document.getElementById('loginModal').classList.add('flex');
+    }
+
+    function closeLogin() {
+      document.getElementById('loginModal').classList.add('hidden');
+    }
+
+    function login() {
+      const pass = document.getElementById('adminPass').value;
+      if (pass === ADMIN_PASS) {
+        isAdmin = true;
+        sessionStorage.setItem('isAdmin', 'true');
+        document.getElementById('adminPanel').classList.remove('hidden');
+        closeLogin();
+        updateDashboard();
+        renderStock();
+      } else {
+        alert('Senha incorreta!');
+      }
+    }
+
+    function logout() {
+      isAdmin = false;
+      sessionStorage.removeItem('isAdmin');
+      document.getElementById('adminPanel').classList.add('hidden');
+    }
+
+    function showTab(tab) {
+      document.getElementById('tabPedidos').classList.add('hidden');
+      document.getElementById('tabStock').classList.add('hidden');
+      document.getElementById('tab' + tab.charAt(0).toUpperCase() + tab.slice(1)).classList.remove('hidden');
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('border-red-700');
+        btn.classList.add('text-gray-600');
+      });
+      event.target.classList.add('border-red-700');
+      event.target.classList.remove('text-gray-600');
+    }
+
+    function updateDashboard() {
+      if (!isAdmin) return;
+
+      const hoje = new Date().toLocaleDateString('pt-MZ');
+      const pedidosHoje = pedidos.filter(p => p.data.includes(hoje));
+      const vendasHoje = pedidosHoje.reduce((sum, p) => sum + p.total, 0);
+
+      document.getElementById('vendasHoje').textContent = vendasHoje.toLocaleString() + ' MT';
+      document.getElementById('pedidosHoje').textContent = pedidosHoje.length;
+
+      const contador = {};
+      pedidos.forEach(p => p.items.forEach(i => {
+        contador[i.nome] = (contador[i.nome] || 0) + i.qtd;
+      }));
+      const maisVendido = Object.keys(contador).sort((a,b) => contador[b] - contador[a])[0] || '-';
+      document.getElementById('maisVendido').textContent = maisVendido;
+
+      const adminPedidos = document.getElementById('adminPedidos');
+      adminPedidos.innerHTML = pedidos.length === 0? '<p class="text-gray-500">Nenhum pedido ainda</p>' :
+        pedidos.map(p => `
+          <div class="border rounded-lg p-4 mb-3 ${p.status === 'entregue'? 'bg-green-50' : 'bg-white'}">
+            <div class="flex justify-between items-start mb-2">
+              <div>
+                <p class="font-bold">Pedido #${p.id}</p>
+                <p class="text-sm text-gray-600">${p.cliente || 'Cliente'} ${p.telefone? '- ' + p.telefone : ''}</p>
+                <p class="text-sm text-gray-600">${p.data}</p>
+              </div>
+              <div class="text-right">
+                <p class="text-xl font-bold text-red-700">${p.total.toLocaleString()} MT</p>
+                <span class="text-xs px-2 py-1 rounded ${p.status === 'entregue'? 'bg-green-500 text-white' : 'bg-yellow-500 text-white'}">
+                  ${p.status === 'entregue'? 'Entregue' : 'Pendente'}
+                </span>
+              </div>
+            </div>
+            <p class="text-sm mb-2">${p.items.map(i => `${i.qtd}x ${i.nome}`).join(', ')}</p>
+            ${p.status === 'pendente'? `<button onclick="marcarEntregue(${p.id})" class="bg-green-600 text-white px-3 py-1 rounded text-sm">Marcar Entregue</button>` : ''}
+          </div>
+        `).join('');
+    }
+
+    function marcarEntregue(id) {
+      const pedido = pedidos.find(p => p.id === id);
+      if (pedido) {
+        pedido.status = 'entregue';
+        localStorage.setItem('pedidos', JSON.stringify(pedidos));
+        updateDashboard();
+      }
+    }
+
+    function renderStock() {
+      const stockList = document.getElementById('stockList');
+      stockList.innerHTML = '';
+      ['peixe', 'lamina', 'suino'].forEach(cat => {
+        stockList.innerHTML += `<h4 class="font-bold text-lg mt-4 mb-2">${cat.toUpperCase()}</h4>`;
+        produtos[cat].forEach(p => {
+          stockList.innerHTML += `
+            <div class="flex items-center gap-3 border-b py-3">
+              <div class="flex-1">
+                <p class="font-bold">${p.nome}</p>
+                <p class="text-sm ${p.stock < 5? 'text-red-600' : 'text-gray-600'}">Stock atual: ${p.stock}</p>
+              </div>
+              <input type="number" value="${p.preco}" onchange="updatePreco('${cat}','${p.id}',this.value)"
+                     class="border rounded px-2 py-1 w-24" placeholder="Preço">
+              <input type="number" value="${p.stock}" onchange="updateStock('${cat}','${p.id}',this.value)"
+                     class="border rounded px-2 py-1 w-20" placeholder="Stock">
+            </div>
+          `;
+        });
+      });
+    }
+
+    function updatePreco(cat, id, preco) {
+      const prod = produtos[cat].find(p => p.id === id);
+      if (prod) {
+        prod.preco = parseInt(preco);
+        saveProdutos();
+        renderProdutos();
+      }
+    }
+
+    function updateStock(cat, id, stock) {
+      const prod = produtos[cat].find(p => p.id === id);
+      if (prod) {
+        prod.stock = parseInt(stock);
+        saveProdutos();
+        renderProdutos();
+      }
+    }
+
+    // Init
+    renderProdutos();
+    if (isAdmin) {
+      document.getElementById('adminPanel').classList.remove('hidden');
+      updateDashboard();
+      renderStock();
+    }
+  </script>
+</body>
+</html>
